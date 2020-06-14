@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <header th:insert="layouts/navbar"></header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <form
+            th:action="@{/admin/userCreate}"
+            th:object="${user}"
+            method="post"
+          >
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                th:field="*{username}"
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Enter Username"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                th:field="*{password}"
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Password"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="fullname">Full Name</label>
+              <input
+                th:field="*{full_name}"
+                type="text"
+                class="form-control"
+                id="fullname"
+                placeholder="Enter Full Name"
+              />
+            </div>
+
+            <!-- is user enable? -->
+            <div class="form-group">
+              <label for="isUserActive">User Activation Status</label><br />
+              <div class="form-check form-check-inline">
+                <input type="checkbox" name="active"
+			           th:value="${user.enabled}"
+			           th:field="*{enabled}"
+			        />
+                <label class="form-check-label" for="userActive">Active</label>
+              </div>
+            </div>
+
+            <!--  Select user roles -->
+            <div class="form-group">
+               	<label>Roles:
+			        <input type="checkbox" name="roles"
+			            th:each="role : ${roles}"
+			            th:text="${role.name}"
+			            th:value="${role.id}"
+			            th:field="*{roles}"
+			        />
+			    </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="align: right;">
+              Save
+            </button>
+          </form>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+    <div th:insert="layouts/footer :: footer"></div>
+  </body>
+</html>

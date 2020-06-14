@@ -9,12 +9,18 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 import com.blog.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+		
+	@Bean
+    public SpringSecurityDialect springSecurityDialect(){
+        return new SpringSecurityDialect();
+    }
 	
 	private static final String[] PUBLIC_MATCHERS = {
 			"/",
@@ -24,6 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"/js/**",
 			"/scss/**",
 			"/vendor/**",
+			"/admin/**",
+			"/user/**"
 		};
 	
 	@Bean
@@ -54,14 +62,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers(PUBLIC_MATCHERS).hasAnyAuthority("USER","EDITOR","ADMIN")
+		.antMatchers(PUBLIC_MATCHERS).permitAll()
+//		.antMatchers("/home/**")
+//			.hasAnyAuthority("USER","EDITOR","ADMIN")
+//		.antMatchers("/admin/**")
+//			.hasAuthority("ADMIN")
 		.and()
-		.formLogin().permitAll()
+		.formLogin()
+			.loginPage("/login").permitAll()
+			.defaultSuccessUrl("/home/index")
 		.and()
-		.logout().permitAll()
+		.logout().logoutUrl("/logout").
+			logoutSuccessUrl("/login?logout").permitAll()
 		.and()
-		.exceptionHandling().accessDeniedPage("/403");
-		
+		.exceptionHandling()
+			.accessDeniedPage("/403");
 	}
-
 }

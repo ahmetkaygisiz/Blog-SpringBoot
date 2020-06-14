@@ -14,41 +14,14 @@ import com.blog.repository.UserRepository;
 public class IndexController {
 	
 	Logger LOGGER = Logger.getLogger(IndexController.class.getName());
-			
-	@Autowired
-	UserRepository userRepository;
 	
 	@RequestMapping("/")
-	public String viewHomePage(Model model) {
+	public String viewIndexPage(Model model) {
 		return "index";
 	}
 	
-	@RequestMapping("/new")
+	@RequestMapping("/login")
 	public String showNewProductForm(Model model) {
-		return "new_product";
+		return "login";
 	}
-	
-//	@RequestMapping(value = "/save", method = RequestMethod.POST)
-//	public String saveProduct(@ModelAttribute("product") Product product) {
-//		service.save(product);
-//		
-//		return "redirect:/";
-//	}
-//	
-//	@RequestMapping("/edit/{id}")
-//	public ModelAndView showEditProductForm(@PathVariable(name = "id") Long id) {
-//		ModelAndView mav = new ModelAndView("edit_product");
-//		
-//		Product product = service.get(id);
-//		mav.addObject("product", product);
-//		
-//		return mav;
-//	}	
-//	
-//	@RequestMapping("/delete/{id}")
-//	public String deleteProduct(@PathVariable(name = "id") Long id) {
-//		service.delete(id);
-//		
-//		return "redirect:/";
-//	}
 }

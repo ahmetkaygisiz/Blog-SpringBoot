@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <header th:insert="layouts/navbar"></header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <table class="table table-bordered table-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Fullname</th>
+                <th scope="col">ROLES</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+				<th:block th:each="user : ${users}">
+				<tr>
+					<th scope="row" th:text="${user.id}"></th>
+					<td th:text="${user.username}"></td>
+					<td>***</td>
+					<td th:text="${user.full_name}"></td>
+					<td>[
+						<span th:each="role : ${user.roles}">
+		                	<span th:text="${role.name}"></span>
+		                </span>]
+					</td>
+					<td>
+						<a class="btn btn-danger btn-sm" 
+								th:href="@{/admin/userDelete/{id}(id=${user.id})}">Delete</a>
+						<a class="btn btn-success btn-sm">Update</a>
+					</td>
+				</tr>
+			</th:block>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+    <div th:insert="layouts/footer :: footer"></div>
+  </body>
+</html>

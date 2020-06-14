@@ -1,21 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head>
-<meta charset="ISO-8859-1">
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div align="center">	
-	<div sec:authorize="isAuthenticated()">
-		Welcome <b><span sec:authentication="name">Username</span></b>
-		&nbsp;
-		<i><span sec:authentication="principal.authorities">Roles</span></i>
+    <header th:insert="layouts/navbar"></header>
+    <div class="container">
+    	<p>Tset sadfasdfas</p>
 	</div>
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Logout" />
-	</form>
-	
-	<h1>Home</h1>	
-</div>
+	<div th:insert="layouts/footer :: footer"></div>
 </body>
 </html>

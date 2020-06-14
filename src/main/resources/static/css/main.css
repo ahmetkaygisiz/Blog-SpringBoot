@@ -1,0 +1,17 @@
+body {
+  font-family: 'Ubuntu Mono', monospace;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: lightslategrey;
+  color: #c6cfc8;
+}
+
+footer p {
+  text-align: center;
+  font-family: 'Ubuntu Mono', monospace;
+}

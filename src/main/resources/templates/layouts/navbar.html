@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+  </head>
+  <body>
+    <th:block th:fragment="header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" th:href="@{/}">Blog</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <form th:action="@{/logout}" method="POST">
+            <div
+              th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}"
+            >
+              <span th:case="${false}">
+                <a th:href="@{/login}">Login</a>
+              </span>
+              <span th:case="${true}">
+                <li class="nav-item dropdown" style="list-style: none;">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span sec:authentication="name">Username</span> &nbsp;
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <div class="dropdown-divider"></div>
+                    <button type="submit" class="btn btn-light dropdown-item">
+                      Logout
+                    </button>
+                  </div>
+                </li>
+              </span>
+            </div>
+          </form>
+        </div>
+      </nav>
+      <br />
+    </th:block>
+  </body>
+</html>

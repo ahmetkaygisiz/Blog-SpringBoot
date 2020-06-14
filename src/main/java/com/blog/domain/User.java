@@ -23,11 +23,11 @@ public class User {
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String username;
 	private String password;
 	private String full_name;
-	
+
 	public String getFull_name() {
 		return full_name;
 	}
@@ -38,13 +38,12 @@ public class User {
 
 	private boolean enabled;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-            )
-    private Set<Role> roles = new HashSet<>();
+			  name = "users_roles", 
+			  joinColumns = @JoinColumn(name = "user_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -86,4 +85,9 @@ public class User {
 		this.roles = roles;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", full_name=" + full_name
+				+ ", enabled=" + enabled + ", roles=" + roles + "]";
+	}
 }
