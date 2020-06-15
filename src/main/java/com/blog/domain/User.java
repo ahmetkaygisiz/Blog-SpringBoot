@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,15 +29,7 @@ public class User {
 	private String username;
 	private String password;
 	private String full_name;
-
-	public String getFull_name() {
-		return full_name;
-	}
-
-	public void setFull_name(String full_name) {
-		this.full_name = full_name;
-	}
-
+	
 	private boolean enabled;
 	
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
@@ -44,7 +38,11 @@ public class User {
 			  joinColumns = @JoinColumn(name = "user_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
-
+	
+	
+	@OneToMany(mappedBy = "user_posts")
+	private Set<Post> posts = new HashSet<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -83,6 +81,23 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public String getFull_name() {
+		return full_name;
+	}
+
+	public void setFull_name(String full_name) {
+		this.full_name = full_name;
+	}
+	
+	
+	public Set<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override

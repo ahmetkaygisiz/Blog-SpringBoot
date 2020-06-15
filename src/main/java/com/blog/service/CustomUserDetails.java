@@ -1,4 +1,4 @@
-package com.blog.domain;
+package com.blog.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,6 +8,9 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.blog.domain.Role;
+import com.blog.domain.User;
 
 public class CustomUserDetails implements UserDetails {
 	

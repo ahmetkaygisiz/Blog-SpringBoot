@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
-import com.blog.service.UserDetailsServiceImpl;
+import com.blog.service.impl.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity

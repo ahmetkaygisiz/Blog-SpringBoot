@@ -1,4 +1,4 @@
-package com.blog.service;
+package com.blog.service.impl;
 
 import java.util.logging.Logger;
 
@@ -8,9 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.blog.domain.CustomUserDetails;
 import com.blog.domain.User;
 import com.blog.repository.UserRepository;
+import com.blog.service.CustomUserDetails;
 
 public class UserDetailsServiceImpl implements UserDetailsService{
 
