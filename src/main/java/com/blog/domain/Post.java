@@ -13,9 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 @Table(name = "posts")
@@ -26,9 +28,13 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@Column(unique = true)
 	private String title;
 	private String subtitle;
 	private String body;
+	
+	private boolean published;
 	
 	@CreationTimestamp
 	private Date created_at;
@@ -36,19 +42,35 @@ public class Post {
 	@UpdateTimestamp
 	private Date updated_at;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
 	@JoinTable(
 			  name = "post_categories", 
 			  joinColumns = @JoinColumn(name = "post_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Category post_categories;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
 	@JoinTable(
 			  name = "user_posts", 
 			  joinColumns = @JoinColumn(name = "post_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private User user_posts;
+	
+	public Category getPost_categories() {
+		return post_categories;
+	}
+
+	public void setPost_categories(Category post_categories) {
+		this.post_categories = post_categories;
+	}
+
+	public User getUser_posts() {
+		return user_posts;
+	}
+
+	public void setUser_posts(User user_posts) {
+		this.user_posts = user_posts;
+	}
 
 	public Long getId() {
 		return id;
@@ -112,5 +134,13 @@ public class Post {
 
 	public void setAuthor(User author) {
 		this.user_posts = author;
+	}
+
+	public boolean isPublished() {
+		return published;
+	}
+
+	public void setPublished(boolean published) {
+		this.published = published;
 	}
 }

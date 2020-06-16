@@ -10,6 +10,6 @@ import com.blog.domain.User;
 public interface UserRepository  extends CrudRepository<User, Long>{
 	
 	@Query("SELECT u FROM User u WHERE u.username = :username")
-	public User getUsernameByUsername(@Param("username") String username);
+	public User getUserByUsername(@Param("username") String username);
 	
 }

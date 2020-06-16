@@ -1,19 +1,18 @@
 package com.blog.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 @Table(name = "categories")
@@ -23,11 +22,13 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
 	private Long id;
-
+	
+	@NotNull
+	@UniqueElements
 	private String name;
 
 	@OneToMany(mappedBy = "post_categories")
-	private Set<Post> posts = new HashSet<>();
+	private List<Post> posts = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -45,11 +46,11 @@ public class Category {
 		this.name = name;
 	}
 
-	public Set<Post> getPost_categories() {
+	public List<Post> getPost_categories() {
 		return posts;
 	}
 
-	public void setPost_categories(Set<Post> posts) {
+	public void setPost_categories(List<Post> posts) {
 		this.posts = posts;
 	}
 }

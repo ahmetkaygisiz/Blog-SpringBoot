@@ -1,5 +1,27 @@
-body {
-  font-family: 'Ubuntu Mono', monospace;
+html > body {
+	background-color: #97b1cf;
+	font-family: 'Ubuntu Mono', monospace;
+}
+
+.post-list {
+	color: black;
+}
+
+.post-list:hover {
+	color: gray;
+}
+
+.post-list > h2 {
+	font-size: 20px;	
+}
+
+.post-list > h3 {
+	font-size: 15px;
+}
+
+.post-list > p {
+	font-size: 12px;
+	font-style: italic;
 }
 
 footer {

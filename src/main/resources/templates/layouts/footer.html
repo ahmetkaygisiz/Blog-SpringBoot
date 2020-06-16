@@ -7,8 +7,21 @@
           <p>Copyright &copy; blog-tutorial.ahmetkaygisiz.space 2020</p>
         </div>
       </footer>
-      <script type="text/javascript" th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
-      <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-    </th:block>
+	    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+	    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		
+		<script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
+		<script>
+			ClassicEditor
+				.create( document.querySelector( '#editor1' ) )
+				.then( editor => {
+					window.editor = editor;
+				} )
+				.catch( error => {
+					console.error( 'There was a problem initializing the editor.', error );
+				} );
+		</script>
+      
+     </th:block>
   </body>
 </html>

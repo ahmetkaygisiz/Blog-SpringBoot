@@ -30,8 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"/js/**",
 			"/scss/**",
 			"/vendor/**",
-			"/admin/**",
-			"/user/**"
+			"/admin/**"
 		};
 	
 	@Bean
@@ -63,10 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers(PUBLIC_MATCHERS).permitAll()
-//		.antMatchers("/home/**")
-//			.hasAnyAuthority("USER","EDITOR","ADMIN")
+		.antMatchers("/home/**")
+			.hasAnyAuthority("USER","EDITOR","ADMIN")
 //		.antMatchers("/admin/**")
 //			.hasAuthority("ADMIN")
+		.antMatchers("/post/**")
+			.hasAnyAuthority("ADMIN","USER")	
 		.and()
 		.formLogin()
 			.loginPage("/login").permitAll()

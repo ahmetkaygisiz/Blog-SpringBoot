@@ -36,10 +36,11 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void updateUser(User user) {
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder(12);
 		User dbUser = userRepository.findById(user.getId()).get();
 		
 		dbUser.setUsername(user.getUsername());
-		dbUser.setPassword(user.getPassword());
+		dbUser.setPassword(bpe.encode(user.getPassword()));
 		dbUser.setRoles(user.getRoles());
 		dbUser.setFull_name(user.getFull_name());
 		dbUser.setEnabled(user.isEnabled());
@@ -60,6 +61,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<Role> getRoles() {
 		return (List<Role>) roleRepository.findAll();
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		return userRepository.getUserByUsername(username);
 	}
 
 }

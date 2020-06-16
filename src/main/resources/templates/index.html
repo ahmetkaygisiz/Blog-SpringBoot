@@ -2,8 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
     <header th:insert="layouts/navbar"></header>
-    <div class="container">
-    	<p>Tset sadfasdfas</p>
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-1"></div>
+    		<div class="col-md-8">
+    			<div class="post-list">
+    				<h1>Title</h1>
+    				<h2>Subtitle</h2>
+    				<p>on posted Date by <b>Auhor</b></p>
+    			</div>
+    			<div class="post-list">
+    				<h1>Title</h1>
+    				<h2>Subtitle</h2>
+    				<p>on posted Date by <b>Auhor</b></p>
+    			</div>
+    		</div>
+    		<div class="col-md-3">
+    			<div class="top-readed">
+    				
+    				<table>
+    					<thead>
+    						<p class="text-center" style="background-color: #fcba03; font-size:30px">Top Readed</p>
+    					</thead>
+    					<tbody>
+    						<tr>
+    							<td><a href="#" style="color: #f0f5a2; font-size:20px"><b>1 - </b> Link</a></td>
+    						</tr>
+    						<tr>
+    							<td><a href="#" style="color: #f0f5a2; font-size:20px"><b>2 - </b> Link</a></td>
+    						</tr>
+    						<tr>
+    							<td><a href="#" style="color: #f0f5a2; font-size:20px"><b>3 - </b> Link</a></td>
+    						</tr>
+    						<tr>
+    							<td><a href="#" style="color: #f0f5a2; font-size:20px"><b>4 - </b> Link</a></td>
+    						</tr>
+    						<tr>
+    							<td><a href="#" style="color: #f0f5a2; font-size:20px"><b>5 - </b> Link</a></td>
+    						</tr>
+    					</tbody>
+    				</table>
+    		</div>
+    	</div>
 	</div>
 	<div th:insert="layouts/footer :: footer"></div>
 </body>

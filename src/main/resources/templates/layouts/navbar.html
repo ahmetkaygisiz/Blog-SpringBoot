@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,16 +10,20 @@
 
     <link th:href="@{/css/main.css}" rel="stylesheet" />
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
-    
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <th:block th:fragment="header">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" th:href="@{/}">Blog</a>
-
+        <a class="navbar-brand" th:href="@{/}"> < kaaygisiz /></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -32,17 +39,76 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#"
+              <a class="nav-link" th:href="@{/}"
                 >Home <span class="sr-only">(current)</span></a
               >
             </li>
+            <li class="nav-item dropdown" style="list-style: none;">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Categories
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Category 1</a>
+                <a class="dropdown-item" href="#">Category 2</a>
+              </div>
+            </li>
+            <li
+              class="nav-item dropdown"
+              style="list-style: none;"
+              sec:authorize="hasAuthority('USER')"
+            >
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Post
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" th:href="@{/post/create}">Create</a>
+                <a class="dropdown-item" th:href="@{/post/list}">List</a>
+              </div>
+            </li>
+
+            <li
+              class="nav-item dropdown"
+              style="list-style: none;"
+              sec:authorize="hasAuthority('ADMIN')"
+            >
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >User
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" th:href="@{/user/create}">Add</a>
+                <a class="dropdown-item" th:href="@{/user/list}">List</a>
+              </div>
+            </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" th:href="@{/about}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+              <a class="nav-link" th:href="@{/contact}">Contact</a>
             </li>
           </ul>
+
           <form th:action="@{/logout}" method="POST">
             <div
               th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}"
@@ -64,7 +130,7 @@
                     <span sec:authentication="name">Username</span> &nbsp;
                   </a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" th:href="@{/user/profile}">Profile</a>
                     <div class="dropdown-divider"></div>
                     <button type="submit" class="btn btn-light dropdown-item">
                       Logout

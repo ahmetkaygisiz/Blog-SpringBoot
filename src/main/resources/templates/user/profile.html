@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:insert="layouts/navbar"></header>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-2" style="word-wrap:break-word;">
+            <img class="rounded-circle" 
+                 th:src="@{/imgs/me.jpg}" 
+            	 alt="Generic placeholder image" width="140" height="140">
+            <h2>@username</h2>
+            <h6>Full Name</h6>
+            <p><a class="btn btn-secondary" role="button">View details</a></p>
+          </div>
+          <div class="col-md-8">
+          	
+          </div>
+        </div><!-- /.row -->
+	</div>
+	<div th:insert="layouts/footer :: footer"></div>
+</body>
+</html>

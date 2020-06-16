@@ -1,6 +1,8 @@
 package com.blog.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,9 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 @Table(name = "users")
@@ -26,7 +30,11 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@Column(unique = true)
 	private String username;
+	
+	@NotNull
 	private String password;
 	private String full_name;
 	
@@ -39,9 +47,8 @@ public class User {
 			  inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	
 	@OneToMany(mappedBy = "user_posts")
-	private Set<Post> posts = new HashSet<>();
+	private List<Post> posts = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -92,11 +99,11 @@ public class User {
 	}
 	
 	
-	public Set<Post> getPosts() {
+	public List<Post> getPosts() {
 		return posts;
 	}
 
-	public void setPosts(Set<Post> posts) {
+	public void setPosts(List<Post> posts) {
 		this.posts = posts;
 	}
 

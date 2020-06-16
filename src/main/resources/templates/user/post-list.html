@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <header th:insert="layouts/navbar"></header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <table class="table table-bordered table-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Subtitle</th>
+                <th scope="col">Author</th>
+                <th scope="col">Published</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+				<th:block th:each="post : ${posts}">
+				<tr>
+					<th scope="row" th:text="${post.id}"></th>
+					<td th:text="${post.title}"></td>
+					<td th:text="${post.subtitle}"></td>
+					<td><span th:text="${post.author.username}"></span>
+					</td>
+					<td th:text="${post.published}"></td>
+					<td>
+						<a class="btn btn-danger btn-sm" 
+								th:href="@{/post/delete/{id}(id=${post.id})}">Delete</a>
+						<a class="btn btn-success btn-sm"
+								th:href="@{/post/edit/{id}(id=${post.id})}">Edit</a>
+					</td>
+				</tr>
+			</th:block>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+    <div th:insert="layouts/footer :: footer"></div>
+  </body>
+</html>

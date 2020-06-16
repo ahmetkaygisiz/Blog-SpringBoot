@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <header th:insert="layouts/navbar"></header>
+    <div class="container" style="padding: 40px;">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-9">
+          <form th:action="@{/post/create}" th:object="${post}" method="post">
+            <!--  Select Categories -->
+            <div class="form-group">
+             <input type="hidden" th:field="${post.id}" />
+             
+           	  <label for="category">Category</label>
+              <select
+                class="browser-default custom-select"
+                th:field="*{post_categories}"
+              >
+                <option selected value="0">Select Category</option>
+                <option
+                  th:each="category : ${categories}"
+                  th:value="${category.id}"
+                  th:text="${category.name}"
+                ></option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input
+                th:field="*{title}"
+                type="text"
+                class="form-control"
+                id="title"
+                placeholder="Post Title"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="subtitle">Subtitle</label>
+              <input
+                th:field="*{subtitle}"
+                type="text"
+                class="form-control"
+                id="subtitle"
+                placeholder="Post Subtitle"
+              />
+            </div>
+
+            <div class="form-group">
+			  <label for="body">Post Body</label>
+			  <textarea
+                id="editor1"
+                name="editor1"
+                th:field="*{body}"
+                class="form-control"
+                placeholder="Body"
+              ></textarea>
+            </div>
+
+            <!-- is post enable? -->
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input type="checkbox" name="published" th:field="*{published}" />
+                <label class="form-check-label" for="published">Publish</label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Save
+            </button>
+          </form>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+    </div>
+    
+    <div th:insert="layouts/footer :: footer"></div>
+  </body>
+</html>

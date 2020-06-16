@@ -1,6 +1,7 @@
 package com.blog.service.impl;
 
-import java.util.Set;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,18 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public void updatePost(Post user) {
+	public void updatePost(Post post) {
+		Post dbPost = postRepository.findById(post.getId()).get();
 		
+		dbPost.setTitle(post.getTitle());
+		dbPost.setSubtitle(post.getSubtitle());
+		dbPost.setBody(post.getBody());
+		dbPost.setCategory(post.getCategory());
+		dbPost.setAuthor(post.getAuthor());
+		dbPost.setUpdated_at(new Date());
+		dbPost.setPublished(post.isPublished());
+		
+		postRepository.save(dbPost);
 	}
 
 	@Override
@@ -41,13 +52,18 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public Set<Category> getCategories() {
-		return (Set<Category>) categoryRepository.findAll();
+	public List<Category> getCategories() {
+		return (List<Category>) categoryRepository.findAll();
 	}
 
 	@Override
-	public Set<Post> postList() {
-		return (Set<Post>) postRepository.findAll();
+	public List<Post> postList() {
+		return (List<Post>) postRepository.findAll();
+	}
+
+	@Override
+	public List<Post> getPostByUsername(String username) {
+		return (List<Post>) postRepository.getPostsByUsername(username);
 	}
 
 }

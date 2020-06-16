@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.blog.domain.Category;
+import com.blog.domain.Post;
 import com.blog.domain.Role;
 import com.blog.domain.User;
 import com.blog.service.UserService;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/user")
+public class UserController {
 	
 	@Autowired
 	UserService userService;
@@ -28,7 +30,13 @@ public class AdminController {
 		return "admin/index";
 	}
 	
-	@GetMapping("/userCreate")
+	@GetMapping("/profile")
+	public String profile() {
+		
+		return "user/profile";
+	}
+	
+	@GetMapping("/create")
 	public String createUser(Model model) {
 		User user = new User();
 		
@@ -39,19 +47,18 @@ public class AdminController {
 		return "admin/user-create";
 	}
 	
-	@PostMapping("/userCreate")
-	public String createUserPost(Model model, @ModelAttribute("user") User user) {
-		userService.createUser(user);
+	@PostMapping("/create")
+	public String createUserPost(@ModelAttribute("user") User user) {
 		
-		List<Role> roles = userService.getRoles();
-		model.addAttribute("roles", roles);
-		user = new User();
-		model.addAttribute("user", user);
+		if(user.getId() == null)
+			userService.createUser(user);
+		else
+			userService.updateUser(user);
 		
-		return "admin/user-create";
+		return "redirect:/user/create";
 	}
 	
-	@GetMapping("/userList")
+	@GetMapping("/list")
 	public String listUser(Model model) {
 		List<User> users = userService.userList();
 		model.addAttribute("users", users);
@@ -59,13 +66,22 @@ public class AdminController {
 		return "admin/user-list";
 	}
 	
-	@RequestMapping("/userDelete/{id}")
-	public String deleteUser(Model model, @PathVariable(name= "id") Long id) {
-		List<User> users = userService.userList();
-		model.addAttribute("users", users);
-		
+	@RequestMapping("/delete/{id}")
+	public String deleteUser(@PathVariable(name= "id") Long id) {
 		userService.deleteUser(id);
-		return "admin/user-list";
+		return "redirect:/user/list";
+	}
+	
+	@RequestMapping("/edit/{id}")
+	public String editUser(@PathVariable("id") Long id,Model model) {
+		User user = userService.findById(id);
+		
+		List<Role> roles = userService.getRoles();
+		
+		model.addAttribute("roles",roles);
+		model.addAttribute("user",user);
+		
+		return "admin/user-create";
 	}
 	
 	@GetMapping("/postConfirm")
