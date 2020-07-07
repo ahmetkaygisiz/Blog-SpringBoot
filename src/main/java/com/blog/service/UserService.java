@@ -15,5 +15,4 @@ public interface UserService {
 	public void deleteUser(Long id);
 	public List<Role> getRoles();
 	public List<User> userList();
-	
 }

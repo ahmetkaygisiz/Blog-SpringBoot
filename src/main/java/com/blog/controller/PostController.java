@@ -70,7 +70,7 @@ public class PostController {
 		model.addAttribute("categories",categories);
 		model.addAttribute("post",post);
 		
-		return "user/post-edit";
+		return "user/post-create";
 	}
 	
 	@RequestMapping("/delete/{id}")
@@ -97,14 +97,9 @@ public class PostController {
 		if(hasAdminRole)
 			posts = postService.postList();
 		else {
-			
 			posts = postService.getPostByUsername(auth.getName());
-			
-			System.out.println("buradayim " + posts);
 		}
-			
-		
-		
+
 		model.addAttribute("posts",posts);
 		
 		return "user/post-list";

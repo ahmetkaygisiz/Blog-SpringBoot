@@ -62,8 +62,17 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
+	public List<Post> postPublishedList() {
+		return postRepository.postPublishedList();
+	}
+
+	@Override
 	public List<Post> getPostByUsername(String username) {
 		return (List<Post>) postRepository.getPostsByUsername(username);
 	}
 
+	@Override
+	public List<Post> getPostsWithCategoryId(Long categoryId) {
+		return (List<Post>) postRepository.getPostsWithCategoryId(categoryId);
+	}
 }

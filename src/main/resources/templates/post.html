@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:insert="layouts/navbar"></header>
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="col-md-9">
+        <h2 th:text="${post.title}"></h2>
+        <p th:text="${post.body}"></p>
+    </div>
+</div>
+<div th:insert="layouts/footer :: footer"></div>
+</body>
+</html>

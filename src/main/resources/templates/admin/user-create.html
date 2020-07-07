@@ -49,11 +49,11 @@
             <div class="form-group">
               <label for="isUserActive">User Activation Status</label><br />
               <div class="form-check form-check-inline">
-                <input type="checkbox" name="active"
+                <input type="checkbox" id="isUserActive" name="active"
 			           th:value="${user.enabled}"
 			           th:field="*{enabled}"
 			        />
-                <label class="form-check-label" for="userActive">Active</label>
+                <label class="form-check-label">Active</label>
               </div>
             </div>
 

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:insert="layouts/navbar"></header>
+   	
+   	<div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 350px;">
+	  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d96357.96946602661!2d29.052692!3d40.99929!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6ed7f4baceb4476c!2sMaiden&#39;s%20Tower!5e0!3m2!1sen!2str!4v1592556379673!5m2!1sen!2str" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+	</div>
+	
+    <div class="container" >
+		 <div class="row" style="padding-bottom:100px">
+		 	<div class="col-md-2"></div>
+		 	<div class="col-md-8">
+		 	 	<h3>Contact Form</h3>
+		 		<form th:action="@{/post/create}"  method="post">
+           
+	            
+	            <div class="form-group">
+	              <label for="title">Subject</label>
+	              <input
+	                type="text"
+	                class="form-control"
+	                id="title"
+	                placeholder="Post Title"
+	              />
+	            </div>
+	
+	            <div class="form-group">
+	              <label for="subtitle">Your name</label>
+	              <input
+	                type="text"
+	                class="form-control"
+	                id="subtitle"
+	                placeholder="Post Subtitle"
+	              />
+	            </div>
+
+				<div class="form-group">
+	              <label for="email">Email</label>
+	              <input
+	                type="text"
+	                class="form-control"
+	                id="email"
+	                placeholder="Post Subtitle"
+	              />
+	            </div>
+
+	            <div class="form-group">
+				  <label for="body">Post Body</label>
+				  <textarea
+				  	id="body"
+	                class="form-control"
+	                placeholder="Body"
+	              ></textarea>
+
+	              <div class="form-group" style="padding-top:30px">
+	              	<button class="btn btn-info">Write Me</button>
+	              </div>
+	            </div>
+			</form>
+			</div>
+		 </div>
+	</div>
+	<div th:insert="layouts/footer :: footer"></div>
+</body>
+</html>

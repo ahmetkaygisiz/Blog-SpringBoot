@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
@@ -46,6 +47,7 @@ public class Category {
 		this.name = name;
 	}
 
+	@JsonIgnore
 	public List<Post> getPost_categories() {
 		return posts;
 	}
